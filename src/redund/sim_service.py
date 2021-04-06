@@ -5,6 +5,6 @@ sim_route = Blueprint('admin',__name__)
 dao = sim_dao()
 @sim_route.route('/sim')
 def sim_sample():
-    dao.p_report()
-    status = "success sim"
-    return jsonify({"status":status})
+    df = dao.p_report()
+    # status = "success sim"
+    return df.to_json()

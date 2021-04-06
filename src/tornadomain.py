@@ -12,6 +12,7 @@ from flask_app import  app
 #         self.write('好看的皮囊千篇一律，有趣的灵魂万里挑一。')
 
 if __name__ == '__main__':
+    app.debug = True
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(80)
     IOLoop.instance().start()
