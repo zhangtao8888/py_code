@@ -8,3 +8,8 @@ def sim_sample():
     df = dao.p_report()
     # status = "success sim"
     return df.to_json()
+
+@sim_route.route('/exe',methods =['POST'])
+def sim_exe():
+    dao.p_exe()
+    return jsonify({"status insert records":"c.to_char"})

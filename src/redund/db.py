@@ -1,5 +1,5 @@
 import psycopg2
-from contextlib import contextmanager
+# from contextlib import contextmanager
 from flask_sqlalchemy import SQLAlchemy as _SQLALchemy
 
 class db(_SQLALchemy):
@@ -12,15 +12,11 @@ class db(_SQLALchemy):
         self._database = 'dbtest'
         self._port = '5432'
 
-    # @contextmanager
     def get_connection(self):
         try:
             conn = psycopg2.connect(database=self._database, user=self._user_name, password=self._pass_word,
                                     host=self._host,port = self._port)
-        except:
-            try:
-                conn.close()
-            except Exception as e:
+        except Exception as e:
                 print("%" ,e)
         return conn
 
