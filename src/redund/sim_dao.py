@@ -110,7 +110,7 @@ class sim_dao():
         for i in df.index:
             # print(df.loc[i,'json_info'])
             json_info = df.loc[i, 'json_info']
-            # json_info.replace('[','')     xfcv
+            # json_info.replace('[','')      
             json_str = json.dumps(json_info)
             print(json_str)
 
