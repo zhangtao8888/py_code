@@ -13,3 +13,8 @@ def sim_sample():
 def sim_exe():
     dao.p_exe()
     return jsonify({"status insert records":"c.to_char"})
+
+@sim_route.route('/json_key',methods = ['POST'])
+def json_key():
+    dao.p_json()
+    return jsonify({"json process":"success"})
