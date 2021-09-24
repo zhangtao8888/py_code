@@ -4,6 +4,7 @@ import pandas as pd
 import redund.tools as tools
 from contextlib import contextmanager
 from flask import request
+import json
 
 class sim_dao():
 
@@ -61,26 +62,56 @@ class sim_dao():
     def p_exe(self):
         sql1 = """select * from public.user_info"""
         df = self.read_sql_query(sql1)
-        column_list = df.columns.values.tolist()
-        rows = [tuple(x) for x in df.values]
-        column_str = "("
+        # column_list = df.columns.values.tolist()
+        # rows = [tuple(x) for x in df.values]
 
-        for column in column_list:
-            print(column)
-            column_str += column+","
-        column_str = column_str[:-1]+")"
-        # "'{user_id}','J')"""
-        value_str = " values ("
-        for i in range(len(column_list)):
-            value_str += "%s" +","
-        value_str = value_str[:-1] + ")"
-        sql2 = "insert into public.user_info" +column_str + value_str
-        para = request.json
-        user_id = para.get("user_id")[0],
-        user_name = para.get("user_name")
-        # sql1 = """insert into public.user_info(user_id,user_name) values ('{user_id}','J')""".replace('{user_id}',user_id)
-        try:
-            self.execute_many(sql2,rows)
-        except Exception as e:
-            print( e)
+
+        # print(df.index)
+        for i in df.index:
+            # print(df.loc[i,'json_info'])
+            json_info = df.loc[i, 'json_info']
+            # json_info.replace('[','')
+            json_str = json.dumps(json_info)
+            print(json_str)
+
+            # json_str2 =
+        # column_str = "("
+        #
+        # for column in column_list:
+        #     print(column)
+        #     column_str += column+","
+        # column_str = column_str[:-1]+")"
+        # # "'{user_id}','J')"""
+        # value_str = " values ("
+        # for i in range(len(column_list)):
+        #     value_str += "%s" +","
+        # value_str = value_str[:-1] + ")"
+        # sql2 = "insert into public.user_info" +column_str + value_str
+        # para = request.json
+        # user_id = para.get("user_id")[0]
+        #
+        # user_name = para.get("user_name")
+        # sql1 = """insert into public.user_info(user_id,user_name) values ('{user_id}','k')""".replace('{user_id}',user_id)
+        # try:
+        #     self.execute_many(sql2,rows)
+        # except Exception as e:
+        #     print( e)
         # return co
+
+    def p_json(self):
+        sql1 = """select * from public.user_info"""
+        df = self.read_sql_query(sql1)
+        df.columns = df.columns.map(lambda x : x.lower())
+        # column_list = df.columns.values.tolist()
+        # rows = [tuple(x) for x in df.values]
+        print(df.columns)
+
+        # print(df.index)
+        for i in df.index:
+            # print(df.loc[i,'json_info'])
+            json_info = df.loc[i, 'json_info']
+            # json_info.replace('[','')     xfcv
+            json_str = json.dumps(json_info)
+            print(json_str)
+
+            # json_str2 =
